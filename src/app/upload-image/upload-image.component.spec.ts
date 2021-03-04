@@ -1,16 +1,30 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed,ComponentFixture } from '@angular/core/testing';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { ImageUploadService } from '../services/image-upload.service';
+import { By } from '@angular/platform-browser';
 
 describe('UploadImageComponent', () => {
+  let component;
   let service = new ImageUploadService();
-  function setup() {
-    const fixture = TestBed.createComponent(UploadImageComponent);
-    const component = fixture.componentInstance;
-    const userService = fixture.debugElement.injector.get(ImageUploadService);
-    return { fixture, component, userService };
-  }
+  let fixture;
 
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        
+      ],
+      declarations: [
+        UploadImageComponent
+      ],
+    }).compileComponents();
+  })
+
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(UploadImageComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
+ 
   it('Base64 image should be upload', () => {
     const userResponse = [
       {
@@ -26,20 +40,11 @@ describe('UploadImageComponent', () => {
     expect(response).toEqual(userResponse);
   })
 
-  xit('should display user is NOT logged in message', () => {
-    const userResponse = [
-      {
-        status: 'success',
-        message: 'image uploaded successfully',
-      },
-    ];
-    const { fixture, component, userService } = setup();
-    spyOn(userService, 'upload').and.returnValue(undefined);
-    fixture.detectChanges();
-
-    const compile = fixture.debugElement.nativeElement;
-    const loggedInUser = compile.querySelector('p');
-    expect(loggedInUser.textContent).toBe(' user is NOT logged In. ');
-  });
+  it('find P tag in whole page', () => {
+    fixture = TestBed.createComponent(UploadImageComponent);
+    component = fixture.componentInstance;
+    let element = fixture.debugElement.queryAll(By.css('p'));
+    expect(element.length).toEqual(4);
+  })
 
 })
