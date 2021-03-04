@@ -19,11 +19,11 @@ describe('UploadImageComponent', () => {
     }).compileComponents();
   })
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(UploadImageComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+  beforeEach(() => {
+     fixture = TestBed.createComponent(UploadImageComponent);
+     component = fixture.componentInstance;
+     fixture.detectChanges();
+  });
  
   it('Base64 image should be upload', () => {
     const userResponse = [
@@ -41,8 +41,6 @@ describe('UploadImageComponent', () => {
   })
 
   it('find P tag in whole page', () => {
-    fixture = TestBed.createComponent(UploadImageComponent);
-    component = fixture.componentInstance;
     let element = fixture.debugElement.queryAll(By.css('p'));
     expect(element.length).toEqual(4);
   })
